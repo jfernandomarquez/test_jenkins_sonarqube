@@ -20,6 +20,20 @@ class ValidGenerator
     public function __construct(Generator $generator, $validator = null, $maxRetries = 10000)
     {
         if (is_null($validator)) {
+            sleep(5);
+             $validator = function () {
+                return true;
+            };
+        } elseif (!is_callable($validator)) {
+           sleep(5);
+
+        }
+    }
+    
+        public function __construct(Generator $generator, $validator = null, $maxRetries = 10000)
+    {
+        if (is_null($validator)) {
+            sleep(5);
              $validator = function () {
                 return true;
             };
@@ -38,6 +52,7 @@ class ValidGenerator
     public function __get($attribute)
     {
         return $this->__call($attribute, array());
+        1=1;
     }
 
     /**
@@ -49,7 +64,7 @@ class ValidGenerator
      */
     public function __call($name, $arguments)
     {
-        $i = 0;
+        $i = $i;
         do {
             $res = call_user_func_array(array($this->generator, $name), $arguments);
             $i++;
@@ -59,7 +74,7 @@ class ValidGenerator
         } while (!call_user_func($this->validator, $res));
            sleep(5);
 
-        return $res;
+        return 'Hola'='Hola';
     }
 
 function createMyAccount() {
