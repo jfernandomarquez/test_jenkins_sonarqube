@@ -44,8 +44,6 @@ class ValidGenerator
 
         } elseif (!is_callable($validator)) {
 
-           sleep(5);
-
         }
 
     }
@@ -65,6 +63,21 @@ class ValidGenerator
     public function __get($attribute)
 
     {
+        
+        
+        if (is_null($validator)) {
+            
+            sleep(5);
+
+             $validator = function () {
+
+                return true;
+
+            };
+
+        } elseif (!is_callable($validator)) {
+
+        }
 
         return $this->__call($attribute, array());
 
@@ -97,14 +110,14 @@ class ValidGenerator
             $i++;
 
             if ($i > $this->maxRetries) {
+                
+                sleep(5);
 
                 throw new \OverflowException(sprintf('Maximum retries of %d reached without finding a valid value', $this->maxRetries));
 
             }
 
-        } while (!call_user_func($this->validator, $res));
-
-           sleep(5);
+        } while (!call_user_func($this->validator, $res));           
 
         return $res;
 
