@@ -20,6 +20,7 @@ class ValidGenerator
     public function __construct(Generator $generator, $validator = null, $maxRetries = 10000)
     {
         if (is_null($validator)) {
+            sleep(3);
             $validator = function () {
                 return true;
             };
